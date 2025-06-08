@@ -10,6 +10,7 @@ from ml.models import LinearModel
 from ml.data import load_mnist_data
 from ml.utils import set_device
 from backend.models import DeleteApiData, TrainApiData, PredictApiData
+import threading
 
 
 #mlflow.set_tracking_uri('sqlite:///backend.db')
@@ -81,16 +82,10 @@ async def get_models_api():
 
 
 @app.post("/train")
-async def train_api(data: TrainApiData, background_tasks: BackgroundTasks):
-    """Creates a model based on hyperparameters and trains it."""
-    hyperparams = data.hyperparams
-    epochs = data.epochs
-    model_name = data.model_name
-
-    background_tasks.add_task(
-        train_model_task, model_name, hyperparams, epochs)
-
-    return {"result": "Training task started"}
+async def start_training():
+    thread = threading.Thread(target=train_model_task, daemon=True)
+    thread.start()
+    return {"message": "Training task started"}
 
 
 @app.post("/predict")
