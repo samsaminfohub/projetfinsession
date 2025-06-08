@@ -1,8 +1,9 @@
-mlflow
-numpy
-pandas
-matplotlib
-torch
-torchvision
-fastapi[all]
-tqdm
+fastapi==0.68.1
+uvicorn==0.15.0
+sqlalchemy==1.4.23
+psycopg2-binary==2.9.1
+mlflow==1.20.2
+scikit-learn==0.24.2
+tensorflow==2.6.0
+pydantic==1.8.2
+python-multipart==0.0.5

@@ -1,17 +1,10 @@
 FROM python:3.9-slim
 
-RUN mkdir /frontend
+WORKDIR /app
 
-COPY requirements.txt /frontend
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-WORKDIR /frontend
+COPY app.py .
 
-RUN pip install -r requirements.txt
-
-COPY . /frontend
-
-EXPOSE 8501
-
-CMD ["streamlit", "run", "streamlit_main.py"]
-
-
+CMD ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
