@@ -2,7 +2,7 @@ FROM python:3.9-slim
 
 WORKDIR /app
 
-RUN pip install mlflow==1.20.2 psycopg2-binary==2.9.1 boto3==1.18.42 protobuf==3.20.3
+RUN pip install mlflow==1.20.2 psycopg2-binary==2.9.1 boto3==1.18.42 protobuf==3.20.3 numpy==1.23.5
 
 CMD ["mlflow", "server", \
      "--backend-store-uri", "${MLFLOW_BACKEND_STORE_URI}", \
